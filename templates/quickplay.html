@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CineLink</title>
+        <link rel="icon" href="static/img/W-100-bluewhite-10.svg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="../static/style.css">
+
+        <script src="static/js/quickplay.js" charset="utf-8" defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+
+        <div class="win-modal">
+            <h2>You Win!</h2>
+            <p id="win-info"></p>
+            <div class="win-button-parent">
+                <div class="win-container" id="restart-button">
+                    <p>Play Again</p>
+                    <div class="win-button">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </div>
+                </div>
+                <div class="win-container" id="home-button">
+                    <p>Main Menu</p>
+                    <div class="win-button">
+                         <i id="home-icon" class="fa-solid fa-house"></i>
+                    </div>
+                </div>
+                <div class="win-container" id="share-button">
+                    <p>Share</p>
+                    <div class="win-button">
+                          <i class="fa-solid fa-share-from-square"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-parent" id="history-parent">
+            <div id="history-icon">
+                <i class="fa-solid fa-book"></i>
+            </div>
+            <p>History</p>
+            <div class="history" id="history">
+{#              <div class="history-item">#}
+{#                  <img src="{{ start[1] }}">#}
+{#              </div>#}
+            </div>
+        </div>
+
+        <div id="modal-bg"></div>
+
+        <div class="upper-content">
+            <div class="header">
+                <h2 id="home-title">CineLink</h2>
+                <div class="nav-items-parent">
+                    <i id="home-icon" class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+            </div>
+
+            <div class="info-container">
+                <div class="current-parent">
+                    <p>Current</p>
+                    <div class="current" data-id="{{ start[2] }}">
+                        <img id="current-img" src="{{ start[1] }}">
+                    </div>
+                    <p id="current-name">{{ start[0] }}</p>
+                </div>
+
+                <div class="center-info">
+                    <div class="clock-parent">
+                        <p>Clock</p>
+                        <h2 id="clock">0:00</h2>
+                    </div>
+                    <div class="click-parent">
+                        <h2 id="click-counter">0</h2>
+                        <p>Click Counter</p>
+                    </div>
+                </div>
+
+                <div class="target-parent">
+                    <p>Target</p>
+                    <div class="target" data-id="{{ target[2] }}">
+                      <img id="target-img" src="{{ target[1] }}">
+                    </div>
+                    <p id="target-name">{{ target[0] }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="lower-content">
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Search">
+            </div>
+
+            <div class="columns">
+                {% if movie_roles %}
+                    <div class="column">
+                        <div class="section-header">
+                            <p>MOVIES</p>
+                        </div>
+                        <div class="data-container">
+                            {% for title, character, url, id in movie_roles %}
+                                <div class="movie-parent" data-id="{{ id }}">
+                                    <img src="{{ url }}">
+                                    <div class="info">
+                                        <h2>{{ title }}</h2>
+                                        <p>{{ character }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if tv_roles %}
+                    <div class="column">
+                        <div class="section-header">
+                            <p>SHOWS</p>
+                        </div>
+                        <div class="data-container">
+                            {% for title, character, url, id in tv_roles %}
+                                <div class="tv-parent" data-id="{{ id }}">
+                                    <img src="{{ url }}">
+                                    <div class="info">
+                                        <h2>{{ title }}</h2>
+                                        <p>{{ character }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+
+{#                <div class="column">#}
+{#                    <div class="section-header">#}
+{#                        <p>OTHER</p>#}
+{#                    </div>#}
+{#                    <div class="data-container">#}
+{#                        {% for title, character, url, id in roles %}#}
+{#                            <div class="movie-parent" data-id="{{ id }}">#}
+{#                                <img src="{{ url }}">#}
+{#                                <div class="info">#}
+{#                                    <h2>{{ title }}</h2>#}
+{#                                    <p>{{ character }}</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+
+    </body>
+</html>
